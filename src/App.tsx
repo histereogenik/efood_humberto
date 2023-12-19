@@ -1,5 +1,12 @@
+import { GlobalCss } from './styles'
+
 function App() {
-  return <div className="App">Morning</div>
+  return (
+    <>
+      <GlobalCss />
+      <div className="container">Morning</div>
+    </>
+  )
 }
 
 export default App
