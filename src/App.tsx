@@ -1,5 +1,5 @@
 import Hero from './components/Hero'
-import RestaurantCard from './components/RestaurantCard'
+import RestaurantList from './components/RestaurantList'
 import { GlobalCss } from './styles'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <>
       <GlobalCss />
       <Hero />
-      <RestaurantCard />
+      <RestaurantList />
     </>
   )
 }
