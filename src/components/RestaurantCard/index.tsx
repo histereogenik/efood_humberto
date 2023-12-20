@@ -7,31 +7,42 @@ import {
   Infos
 } from './styles'
 
-import sushi from '../../assets/sushi.png'
 import star from '../../assets/star.svg'
 import Button from '../Button'
 import Tag from '../Tag'
 
-const RestaurantCard = () => (
+type Props = {
+  title: string
+  rating: string
+  origin: string
+  description: string
+  image: string
+  highlight?: boolean
+}
+
+const RestaurantCard = ({
+  title,
+  rating,
+  origin,
+  description,
+  image,
+  highlight
+}: Props) => (
   <Card>
-    <DishImage src={sushi} alt="sushi" />
+    <DishImage src={image} alt="sushi" />
     <Infos>
-      <Tag>Japonesa</Tag>
+      {highlight === true && <Tag>Destaque da semana</Tag>}
+      <Tag>{origin}</Tag>
     </Infos>
     <div>
       <TitleRating className="flex">
-        <h4>Hioki Sushi</h4>
+        <h4>{title}</h4>
         <div className="flex">
-          <h4>4.9</h4>
+          <h4>{rating}</h4>
           <RatingStar src={star} alt="star" />
         </div>
       </TitleRating>
-      <Description>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi neque
-        eos libero ab accusamus, sequi quae voluptas, voluptates voluptatibus
-        natus asperiores sunt rerum blanditiis dolorem voluptate autem dolore
-        veritatis. Rem.
-      </Description>
+      <Description>{description}</Description>
       <Button
         title="Clique aqui para saber mais"
         background="white"
