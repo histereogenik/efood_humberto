@@ -1,12 +1,23 @@
-import { Card, TitleRating, RatingStar, Description, DishImage } from './styles'
+import {
+  Card,
+  TitleRating,
+  RatingStar,
+  Description,
+  DishImage,
+  Infos
+} from './styles'
 
 import sushi from '../../assets/sushi.png'
 import star from '../../assets/star.svg'
 import Button from '../Button'
+import Tag from '../Tag'
 
 const RestaurantCard = () => (
   <Card>
     <DishImage src={sushi} alt="sushi" />
+    <Infos>
+      <Tag>Japonesa</Tag>
+    </Infos>
     <div>
       <TitleRating className="flex">
         <h4>Hioki Sushi</h4>

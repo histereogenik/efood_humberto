@@ -39,3 +39,8 @@ export const Description = styled.p`
   line-height: 22px;
   margin-bottom: 16px;
 `
+export const Infos = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+`
