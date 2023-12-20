@@ -20,7 +20,6 @@ export const GlobalCss = createGlobalStyle`
   body {
     background-color: ${colors.lightCream};
     color: ${colors.salmon};
-    padding-top: 40px;
   }
 
   .container {
