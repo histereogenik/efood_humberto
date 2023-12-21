@@ -1,11 +1,12 @@
 import Hero from './components/Hero'
 import RestaurantList from './components/RestaurantList'
+import Footer from './components/Footer'
+
+import Restaurant from './models/Restaurant'
 
 import { GlobalCss } from './styles'
 import sushi from './assets/sushi.png'
 import pasta from './assets/pasta.png'
-
-import Restaurant from './models/Restaurant'
 
 const restaurants: Restaurant[] = [
   {
@@ -76,6 +77,7 @@ function App() {
       <GlobalCss />
       <Hero />
       <RestaurantList restaurants={restaurants} />
+      <Footer />
     </>
   )
 }

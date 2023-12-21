@@ -14,6 +14,7 @@ export const TightButton = styled.button<
   font-weight: bold;
   padding: 4px 8px;
   border: none;
+  cursor: pointer;
 `
 export const WideButton = styled(TightButton)`
   width: 100%;
