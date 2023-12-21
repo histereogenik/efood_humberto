@@ -10,6 +10,7 @@ import {
 import star from '../../assets/star.svg'
 import Button from '../Button'
 import Tag from '../Tag'
+import { Link } from 'react-router-dom'
 
 type Props = {
   title: string
@@ -44,6 +45,7 @@ const RestaurantCard = ({
       </TitleRating>
       <Description>{description}</Description>
       <Button
+        to="/ladouce"
         title="Clique aqui para saber mais"
         background="white"
         type="tight"

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { TightButton, WideButton } from './styles'
 
 export type Props = {
@@ -23,8 +25,21 @@ const Button = ({ type, title, to, onClick, children, background }: Props) => {
     )
   }
 
+  if (to) {
+    return (
+      <TightButton as={Link} to={to} title={title} background={background}>
+        {children}
+      </TightButton>
+    )
+  }
+
   return (
-    <TightButton to={to as string} title={title} background={background}>
+    <TightButton
+      to={to as string}
+      title={title}
+      onClick={onClick}
+      background={background}
+    >
       {children}
     </TightButton>
   )
