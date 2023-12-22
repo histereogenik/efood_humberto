@@ -20,7 +20,7 @@ export const DishImage = styled.img`
   object-fit: cover;
   margin-top: -9px;
   margin-left: -9px;
-  filter: brightness(80%);
+  filter: brightness(90%);
 `
 export const TitleRating = styled.div`
   margin-top: 8px;

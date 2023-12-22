@@ -4,6 +4,7 @@ import Restaurant from '../../models/Restaurant'
 
 import sushi from '../../assets/sushi.png'
 import pasta from '../../assets/pasta.png'
+import ProfileBanner from '../../components/ProfileBanner'
 
 const restaurants: Restaurant[] = [
   {
@@ -71,6 +72,7 @@ const restaurants: Restaurant[] = [
 const LaDolceProfile = () => (
   <>
     <Header />
+    <ProfileBanner />
   </>
 )
 
