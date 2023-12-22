@@ -1,12 +1,16 @@
 import { Image, FlexContainer } from './styles'
 
-import pastaFilter from '../../assets/pasta_filter.png'
+type Props = {
+  background: string
+  origin: string
+  title: string
+}
 
-const ProfileBanner = () => (
-  <Image style={{ backgroundImage: `url(${pastaFilter})` }}>
+const ProfileBanner = ({ background, origin, title }: Props) => (
+  <Image style={{ backgroundImage: `url(${background})` }}>
     <FlexContainer className="container">
-      <h1 className="textThin">Italiana</h1>
-      <h1 className="textBolder">La Dolce Vita Trattoria</h1>
+      <h1 className="textThin">{origin}</h1>
+      <h1 className="textBolder">{title}</h1>
     </FlexContainer>
   </Image>
 )
