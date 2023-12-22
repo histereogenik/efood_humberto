@@ -1,5 +1,4 @@
-import Hero from '../../components/Hero'
-import RestaurantList from '../../components/RestaurantList'
+import Header from '../../components/Header'
 
 import Restaurant from '../../models/Restaurant'
 
@@ -69,6 +68,10 @@ const restaurants: Restaurant[] = [
   }
 ]
 
-const LaDolceProfile = () => <>ladouce</>
+const LaDolceProfile = () => (
+  <>
+    <Header />
+  </>
+)
 
 export default LaDolceProfile
