@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
 
-export const ProductCard = styled.div`
+export const ProductContainer = styled.div`
   background-color: ${colors.salmon};
   padding: 8px;
   width: 100%;

@@ -5,7 +5,7 @@ import { colors } from '../../styles'
 export const HeaderContainer = styled.header`
   padding: 64px 0;
   background-image: url('${heroBg}');
-  height: 184px;
+  height: 168px;
 `
 export const FlexContainer = styled.div`
   position: relative;
