@@ -13,7 +13,7 @@ type Props = {
   productDescription: string
 }
 
-const adicionarAoCarrinho = () => {
+export const adicionarAoCarrinho = () => {
   alert('produto adicionado')
 }
 
