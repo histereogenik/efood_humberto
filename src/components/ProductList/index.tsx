@@ -2,7 +2,6 @@ import { ProductsContainer } from './styles'
 
 import ProductCard from '../ProductCard'
 import Product from '../../models/Product'
-import ProductModal from '../ProductModal'
 
 type Props = {
   products: Product[]
@@ -20,7 +19,6 @@ const ProductList = ({ products }: Props) => (
         />
       ))}
     </ProductsContainer>
-    <ProductModal />
   </div>
 )
 

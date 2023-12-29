@@ -6,6 +6,8 @@ import {
 } from './styles'
 
 import Button from '../Button'
+import { useState } from 'react'
+import ProductModal from '../ProductModal'
 
 type Props = {
   productImg: string
@@ -13,28 +15,39 @@ type Props = {
   productDescription: string
 }
 
-export const adicionarAoCarrinho = () => {
-  alert('produto adicionado')
-}
-
 const ProductCard = ({
   productDescription,
   productImg,
   productTitle
-}: Props) => (
-  <ProductContainer>
-    <ProductImage src={productImg} alt="pizza" />
-    <ProductName>{productTitle}</ProductName>
-    <Description>{productDescription}</Description>
-    <Button
-      background="salmon"
-      title="Clique aqui para adicionar esse produto ao carrinho"
-      type="wide"
-      onClick={adicionarAoCarrinho}
-    >
-      Adicionar ao carrinho
-    </Button>
-  </ProductContainer>
-)
+}: Props) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const openModal = () => {
+    setModalIsOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+  }
+
+  return (
+    <>
+      <ProductContainer>
+        <ProductImage src={productImg} alt="pizza" />
+        <ProductName>{productTitle}</ProductName>
+        <Description>{productDescription}</Description>
+        <Button
+          background="salmon"
+          title="Clique aqui para adicionar esse produto ao carrinho"
+          type="wide"
+          onClick={openModal}
+        >
+          Adicionar ao carrinho
+        </Button>
+      </ProductContainer>
+      <ProductModal isVisible={modalIsOpen} closeModal={closeModal} />
+    </>
+  )
+}
 
 export default ProductCard
