@@ -9,12 +9,25 @@ export const Image = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   color: ${colors.white};
+  position: relative;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    content: '';
+  }
 `
 export const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  z-index: 1;
+  position: relative;
 
   .textThin {
     font-weight: 100;

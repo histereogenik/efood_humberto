@@ -6,10 +6,13 @@ export const ProductContainer = styled.div`
   padding: 8px;
   width: 100%;
   max-width: 320px;
+  height: 100%;
+  max-height: 348px;
   color: ${colors.cream};
 `
 export const ProductImage = styled.img`
   width: 100%;
+  max-height: 160px;
   object-fit: cover;
 `
 export const ProductName = styled.div`

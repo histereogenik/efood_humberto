@@ -22,6 +22,13 @@ const ProductCard = ({
 }: Props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
+  const getDescription = (desc: string) => {
+    if (desc.length > 165) {
+      return desc.slice(0, 162) + '...'
+    }
+    return desc
+  }
+
   const openModal = () => {
     setModalIsOpen(true)
   }
@@ -35,7 +42,7 @@ const ProductCard = ({
       <ProductContainer>
         <ProductImage src={productImg} alt="pizza" />
         <ProductName>{productTitle}</ProductName>
-        <Description>{productDescription}</Description>
+        <Description>{getDescription(productDescription)}</Description>
         <Button
           background="salmon"
           title="Clique aqui para adicionar esse produto ao carrinho"

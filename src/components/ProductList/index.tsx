@@ -1,21 +1,21 @@
 import { ProductsContainer } from './styles'
 
 import ProductCard from '../ProductCard'
-import Product from '../../models/Product'
+import { MenuItem } from '../../pages/Home'
 
 type Props = {
-  products: Product[]
+  menuItems: MenuItem[]
 }
 
-const ProductList = ({ products }: Props) => (
+const ProductList = ({ menuItems }: Props) => (
   <div className="container">
     <ProductsContainer>
-      {products.map((p) => (
+      {menuItems.map((i) => (
         <ProductCard
-          key={p.id}
-          productImg={p.image}
-          productTitle={p.title}
-          productDescription={p.description}
+          key={i.id}
+          productTitle={i.nome}
+          productDescription={i.descricao}
+          productImg={i.foto}
         />
       ))}
     </ProductsContainer>

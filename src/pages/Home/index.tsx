@@ -3,6 +3,15 @@ import { useEffect, useState } from 'react'
 import Hero from '../../components/Hero'
 import RestaurantList from '../../components/RestaurantList'
 
+export interface MenuItem {
+  foto: string
+  preco: number
+  id: number
+  nome: string
+  descricao: string
+  porcao: string
+}
+
 export type Restaurant = {
   id: number
   titulo: string
@@ -11,14 +20,7 @@ export type Restaurant = {
   avaliacao: number
   descricao: string
   capa: string
-  cardapio: {
-    foto: string
-    preco: number
-    id: number
-    nome: string
-    descricao: string
-    porcao: string
-  }
+  cardapio: MenuItem[]
 }
 
 const Home = () => {

@@ -10,9 +10,9 @@ import {
 import star from '../../assets/star.svg'
 import Button from '../Button'
 import Tag from '../Tag'
-import { Link } from 'react-router-dom'
 
 type Props = {
+  id: number
   title: string
   rating: number
   origin: string
@@ -22,6 +22,7 @@ type Props = {
 }
 
 const RestaurantCard = ({
+  id,
   title,
   rating,
   origin,
@@ -40,7 +41,7 @@ const RestaurantCard = ({
     <Card>
       <DishImage src={image} alt="sushi" />
       <Infos>
-        {highlight === true && <Tag>Destaque da semana</Tag>}
+        {highlight === true && <Tag>destaque da semana</Tag>}
         <Tag>{origin}</Tag>
       </Infos>
       <div>
@@ -53,7 +54,7 @@ const RestaurantCard = ({
         </TitleRating>
         <Description>{getDescription(description)}</Description>
         <Button
-          to="/ladouce"
+          to={`/product/${id}`}
           title="Clique aqui para saber mais"
           background="white"
           type="tight"
