@@ -8,17 +8,20 @@ import {
 import Button from '../Button'
 import { useState } from 'react'
 import ProductModal from '../ProductModal'
+import { MenuItem } from '../../pages/Home'
 
 type Props = {
   productImg: string
   productTitle: string
   productDescription: string
+  menuItem: MenuItem
 }
 
 const ProductCard = ({
   productDescription,
   productImg,
-  productTitle
+  productTitle,
+  menuItem
 }: Props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
@@ -52,7 +55,11 @@ const ProductCard = ({
           Adicionar ao carrinho
         </Button>
       </ProductContainer>
-      <ProductModal isVisible={modalIsOpen} closeModal={closeModal} />
+      <ProductModal
+        menuItem={menuItem}
+        isVisible={modalIsOpen}
+        closeModal={closeModal}
+      />
     </>
   )
 }

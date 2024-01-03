@@ -12,6 +12,7 @@ const ProductList = ({ menuItems }: Props) => (
     <ProductsContainer>
       {menuItems.map((i) => (
         <ProductCard
+          menuItem={i}
           key={i.id}
           productTitle={i.nome}
           productDescription={i.descricao}

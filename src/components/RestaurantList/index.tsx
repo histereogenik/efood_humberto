@@ -6,32 +6,23 @@ type Props = {
   restaurants: Restaurant[]
 }
 
-const RestaurantList = ({ restaurants }: Props) => {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price)
-  }
-
-  return (
-    <div className="container">
-      <List>
-        {restaurants.map((r) => (
-          <RestaurantCard
-            key={r.id}
-            title={r.titulo}
-            rating={r.avaliacao}
-            origin={r.tipo}
-            description={r.descricao}
-            image={r.capa}
-            highlight={r.destacado}
-            id={r.id}
-          />
-        ))}
-      </List>
-    </div>
-  )
-}
+const RestaurantList = ({ restaurants }: Props) => (
+  <div className="container">
+    <List>
+      {restaurants.map((r) => (
+        <RestaurantCard
+          key={r.id}
+          title={r.titulo}
+          rating={r.avaliacao}
+          origin={r.tipo}
+          description={r.descricao}
+          image={r.capa}
+          highlight={r.destacado}
+          id={r.id}
+        />
+      ))}
+    </List>
+  </div>
+)
 
 export default RestaurantList
