@@ -6,35 +6,62 @@ import {
 } from './styles'
 
 import Button from '../Button'
+import { useState } from 'react'
+import ProductModal from '../ProductModal'
+import { MenuItem } from '../../pages/Home'
 
 type Props = {
   productImg: string
   productTitle: string
   productDescription: string
-}
-
-const adicionarAoCarrinho = () => {
-  alert('produto adicionado')
+  menuItem: MenuItem
 }
 
 const ProductCard = ({
   productDescription,
   productImg,
-  productTitle
-}: Props) => (
-  <ProductContainer>
-    <ProductImage src={productImg} alt="pizza" />
-    <ProductName>{productTitle}</ProductName>
-    <Description>{productDescription}</Description>
-    <Button
-      background="salmon"
-      title="Clique aqui para adicionar esse produto ao carrinho"
-      type="wide"
-      onClick={adicionarAoCarrinho}
-    >
-      Adicionar ao carrinho
-    </Button>
-  </ProductContainer>
-)
+  productTitle,
+  menuItem
+}: Props) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+
+  const getDescription = (desc: string) => {
+    if (desc.length > 165) {
+      return desc.slice(0, 162) + '...'
+    }
+    return desc
+  }
+
+  const openModal = () => {
+    setModalIsOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalIsOpen(false)
+  }
+
+  return (
+    <>
+      <ProductContainer>
+        <ProductImage src={productImg} alt="pizza" />
+        <ProductName>{productTitle}</ProductName>
+        <Description>{getDescription(productDescription)}</Description>
+        <Button
+          background="salmon"
+          title="Clique aqui para adicionar esse produto ao carrinho"
+          type="wide"
+          onClick={openModal}
+        >
+          Adicionar ao carrinho
+        </Button>
+      </ProductContainer>
+      <ProductModal
+        menuItem={menuItem}
+        isVisible={modalIsOpen}
+        closeModal={closeModal}
+      />
+    </>
+  )
+}
 
 export default ProductCard

@@ -7,6 +7,7 @@ export const Card = styled.div`
   border: 1px solid ${colors.salmon};
   padding: 8px;
   width: 472px;
+  height: 400px;
 
   .flex {
     display: flex;
@@ -20,7 +21,7 @@ export const DishImage = styled.img`
   object-fit: cover;
   margin-top: -9px;
   margin-left: -9px;
-  filter: brightness(90%);
+  filter: brightness(80%);
 `
 export const TitleRating = styled.div`
   margin-top: 8px;
