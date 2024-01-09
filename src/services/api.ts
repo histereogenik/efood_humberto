@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { MenuItem, Restaurant } from '../pages/Home'
+import { Restaurant } from '../pages/Home'
 
 const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -8,9 +8,12 @@ const api = createApi({
   endpoints: (builder) => ({
     getRestaurants: builder.query<Restaurant[], void>({
       query: () => 'restaurantes'
+    }),
+    getSelectedRestaurant: builder.query<Restaurant, string>({
+      query: (id) => `restaurantes/${id}`
     })
   })
 })
 
-export const { useGetRestaurantsQuery } = api
+export const { useGetRestaurantsQuery, useGetSelectedRestaurantQuery } = api
 export default api
