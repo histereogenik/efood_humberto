@@ -1,7 +1,10 @@
+import { useDispatch, useSelector } from 'react-redux'
+
+import { RootReducer } from '../../store'
+import { close, remove } from '../../store/reducers/cart'
+
 import Button from '../Button'
-
 import margs from '../../assets/pizzaMarguerita.png'
-
 import {
   CartContainer,
   CartProduct,
@@ -9,16 +12,26 @@ import {
   Sidebar,
   TotalPrice
 } from './styles'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
-import { close } from '../../store/reducers/cart'
 
 const Cart = () => {
   const dispatch = useDispatch()
-  const { isOpen } = useSelector((state: RootReducer) => state.cart)
+  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
 
   const closeCart = () => {
     dispatch(close())
+  }
+
+  const removeItem = (id: number) => {
+    dispatch(remove(id))
+  }
+
+  const formatPrice = (price: number) => {
+    const formatedNumber = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(price)
+
+    return formatedNumber
   }
 
   return (
@@ -26,34 +39,20 @@ const Cart = () => {
       <Overlay onClick={closeCart}></Overlay>
       <Sidebar>
         <ul>
-          <CartProduct>
-            <img src={margs} alt="nome" />
-            <div>
-              <h3>Pizza Marguerita</h3>
-              <span>R$ 60,90</span>
-            </div>
-            <button type="button" />
-          </CartProduct>
-          <CartProduct>
-            <img src={margs} alt="nome" />
-            <div>
-              <h3>Pizza Marguerita</h3>
-              <span>R$ 60,90</span>
-            </div>
-            <button type="button" />
-          </CartProduct>
-          <CartProduct>
-            <img src={margs} alt="nome" />
-            <div>
-              <h3>Pizza Marguerita</h3>
-              <span>R$ 60,90</span>
-            </div>
-            <button type="button" />
-          </CartProduct>
+          {items.map((item) => (
+            <CartProduct key={item.id}>
+              <img src={item.foto} alt={item.nome} />
+              <div>
+                <h3>{item.nome}</h3>
+                <span>{formatPrice(item.preco)}</span>
+              </div>
+              <button type="button" />
+            </CartProduct>
+          ))}
         </ul>
         <TotalPrice>
           <span>Valor Total</span>
-          <span>R$ 182,70</span>
+          <span>{}</span>
         </TotalPrice>
         <Button background="salmon" title="Avançar para o endereço" type="wide">
           Continuar com a entrega
