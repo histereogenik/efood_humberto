@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Modal = styled.div`
   position: fixed;
@@ -32,12 +32,22 @@ export const ModalContainer = styled.div`
   color: ${colors.white};
   position: relative;
   z-index: 1;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: block;
+  }
 `
 export const ProductImage = styled.img`
   width: 280px;
   height: 280px;
   object-fit: cover;
   margin-right: 24px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    margin: 0;
+    width: 100%;
+    height: 50%;
+  }
 `
 export const Infos = styled.div`
   h4 {

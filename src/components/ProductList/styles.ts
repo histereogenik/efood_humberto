@@ -8,7 +8,7 @@ export const ProductsContainer = styled.ul`
   margin-top: 56px;
   margin-bottom: 120px;
 
-  @media (max-width: ${breakpoints.tablet}) {
+  @media (max-width: ${breakpoints.desktop}) {
     grid-template-columns: 1fr 1fr;
   }
 `

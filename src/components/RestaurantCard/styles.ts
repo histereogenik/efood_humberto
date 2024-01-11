@@ -6,8 +6,9 @@ export const Card = styled.div`
   position: relative;
   border: 1px solid ${colors.salmon};
   padding: 8px;
-  width: 472px;
-  height: 400px;
+  width: 100%;
+  max-width: 472px;
+  height: 100%;
 
   .flex {
     display: flex;
