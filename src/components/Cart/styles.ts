@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
 import trashBin from '../../assets/trashbin.png'
-import Button from '../Button'
 
 export const Overlay = styled.div`
   position: absolute;

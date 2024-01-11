@@ -34,6 +34,12 @@ const Cart = () => {
     return formatedNumber
   }
 
+  const getTotalPrice = () => {
+    return items.reduce((accumulator, currentValue) => {
+      return (accumulator += currentValue.preco!)
+    }, 0)
+  }
+
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay onClick={closeCart}></Overlay>
@@ -46,13 +52,13 @@ const Cart = () => {
                 <h3>{item.nome}</h3>
                 <span>{formatPrice(item.preco)}</span>
               </div>
-              <button type="button" />
+              <button type="button" onClick={() => removeItem(item.id)} />
             </CartProduct>
           ))}
         </ul>
         <TotalPrice>
           <span>Valor Total</span>
-          <span>{}</span>
+          <span>{formatPrice(getTotalPrice())}</span>
         </TotalPrice>
         <Button background="salmon" title="Avançar para o endereço" type="wide">
           Continuar com a entrega
