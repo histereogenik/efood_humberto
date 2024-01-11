@@ -1,8 +1,12 @@
+import { useDispatch } from 'react-redux'
+
+import { add, open } from '../../store/reducers/cart'
+
 import Button from '../Button'
+import { MenuItem } from '../../pages/Home'
 
 import { Modal, ModalContainer, Infos, CloseBtn, ProductImage } from './styles'
 import close from '../../assets/close.png'
-import { MenuItem } from '../../pages/Home'
 
 type Props = {
   isVisible: boolean
@@ -10,11 +14,14 @@ type Props = {
   menuItem: MenuItem
 }
 
-const adicionarAoCarrinho = () => {
-  alert('produto adicionado')
-}
-
 const ProductModal = ({ isVisible, closeModal, menuItem }: Props) => {
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    dispatch(add(menuItem))
+    dispatch(open())
+  }
+
   const formatPrice = (price: number) => {
     const formatedNumber = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -42,7 +49,7 @@ const ProductModal = ({ isVisible, closeModal, menuItem }: Props) => {
             type="tight"
             title="Clique para adicionar ao carrinho"
             background="salmon"
-            onClick={adicionarAoCarrinho}
+            onClick={addToCart}
           >
             {formatPrice(menuItem.preco)}
           </Button>

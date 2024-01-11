@@ -1,11 +1,16 @@
 import styled from 'styled-components'
 import heroBg from '../../assets/hero_bg.png'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const HeaderContainer = styled.header`
   padding: 64px 0;
   background-image: url('${heroBg}');
   height: 168px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 32px 0;
+    height: 100%;
+  }
 `
 export const FlexContainer = styled.div`
   position: relative;
@@ -17,6 +22,7 @@ export const FlexContainer = styled.div`
     color: ${colors.salmon};
     font-weight: bold;
     font-size: 18px;
+    cursor: pointer;
   }
 `
 export const Logo = styled.img`
@@ -25,4 +31,8 @@ export const Logo = styled.img`
   transform: translateX(-50%);
   width: 100%;
   max-width: 125px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: none;
+  }
 `
