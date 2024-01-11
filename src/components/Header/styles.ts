@@ -17,6 +17,7 @@ export const FlexContainer = styled.div`
     color: ${colors.salmon};
     font-weight: bold;
     font-size: 18px;
+    cursor: pointer;
   }
 `
 export const Logo = styled.img`

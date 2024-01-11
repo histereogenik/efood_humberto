@@ -3,10 +3,12 @@ import { MenuItem } from '../../pages/Home'
 
 type CartState = {
   items: MenuItem[]
+  isOpen: boolean
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
+  isOpen: false
 }
 
 const cartSlice = createSlice({
@@ -15,9 +17,15 @@ const cartSlice = createSlice({
   reducers: {
     add: (state, action: PayloadAction<MenuItem>) => {
       state.items.push(action.payload)
+    },
+    open: (state) => {
+      state.isOpen = true
+    },
+    close: (state) => {
+      state.isOpen = false
     }
   }
 })
 
-export const { add } = cartSlice.actions
+export const { add, close, open } = cartSlice.actions
 export default cartSlice.reducer
