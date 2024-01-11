@@ -26,8 +26,8 @@ const ProductCard = ({
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const getDescription = (desc: string) => {
-    if (desc.length > 165) {
-      return desc.slice(0, 162) + '...'
+    if (desc.length > 125) {
+      return desc.slice(0, 122) + '...'
     }
     return desc
   }
