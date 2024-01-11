@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
 import trashBin from '../../assets/trashbin.png'
+import Button from '../Button'
 
 export const Overlay = styled.div`
   position: absolute;
@@ -31,6 +32,11 @@ export const Sidebar = styled.aside`
   padding: 32px 8px 0 8px;
   max-width: 360px;
   width: 100%;
+  overflow-y: auto;
+
+  > button {
+    margin-bottom: 16px;
+  }
 `
 export const TotalPrice = styled.div`
   display: flex;
