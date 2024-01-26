@@ -4,7 +4,6 @@ import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
 
 import Button from '../Button'
-import margs from '../../assets/pizzaMarguerita.png'
 import {
   CartContainer,
   CartProduct,
@@ -36,6 +35,7 @@ const Cart = () => {
 
   const getTotalPrice = () => {
     return items.reduce((accumulator, currentValue) => {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return (accumulator += currentValue.preco!)
     }, 0)
   }
