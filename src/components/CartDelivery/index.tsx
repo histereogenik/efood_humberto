@@ -1,7 +1,11 @@
 import Button from '../Button'
 import * as S from './styles'
 
-const CartDelivery = () => {
+type Props = {
+  toCart: () => void
+}
+
+const CartDelivery = ({ toCart }: Props) => {
   return (
     <S.DeliveryContainer>
       <form>
@@ -37,7 +41,12 @@ const CartDelivery = () => {
         Continuar com o pagamento
       </Button>
       <S.ButtonWrapper>
-        <Button background="salmon" title="Voltar para o carrinho" type="wide">
+        <Button
+          background="salmon"
+          title="Voltar para o carrinho"
+          type="wide"
+          onClick={toCart}
+        >
           Voltar para o carrinho
         </Button>
       </S.ButtonWrapper>
