@@ -11,6 +11,7 @@ import {
   Sidebar,
   TotalPrice
 } from './styles'
+import CartDelivery from '../CartDelivery'
 
 const Cart = () => {
   const dispatch = useDispatch()
@@ -44,25 +45,32 @@ const Cart = () => {
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay onClick={closeCart}></Overlay>
       <Sidebar>
-        <ul>
-          {items.map((item) => (
-            <CartProduct key={item.id}>
-              <img src={item.foto} alt={item.nome} />
-              <div>
-                <h3>{item.nome}</h3>
-                <span>{formatPrice(item.preco)}</span>
-              </div>
-              <button type="button" onClick={() => removeItem(item.id)} />
-            </CartProduct>
-          ))}
-        </ul>
-        <TotalPrice>
-          <span>Valor Total</span>
-          <span>{formatPrice(getTotalPrice())}</span>
-        </TotalPrice>
-        <Button background="salmon" title="Avançar para o endereço" type="wide">
-          Continuar com a entrega
-        </Button>
+        <div>
+          <ul>
+            {items.map((item) => (
+              <CartProduct key={item.id}>
+                <img src={item.foto} alt={item.nome} />
+                <div>
+                  <h3>{item.nome}</h3>
+                  <span>{formatPrice(item.preco)}</span>
+                </div>
+                <button type="button" onClick={() => removeItem(item.id)} />
+              </CartProduct>
+            ))}
+          </ul>
+          <TotalPrice>
+            <span>Valor Total</span>
+            <span>{formatPrice(getTotalPrice())}</span>
+          </TotalPrice>
+          <Button
+            background="salmon"
+            title="Avançar para o endereço"
+            type="wide"
+          >
+            Continuar com a entrega
+          </Button>
+        </div>
+        <CartDelivery />
       </Sidebar>
     </CartContainer>
   )
