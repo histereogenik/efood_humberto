@@ -36,3 +36,18 @@ export const Logo = styled.img`
     display: none;
   }
 `
+export const CartButton = styled.a`
+  display: flex;
+  column-gap: 4px;
+
+  img {
+    width: 100%;
+    max-width: 18px;
+  }
+
+  span {
+    @media (max-width: ${breakpoints.tablet}) {
+      display: none;
+    }
+  }
+`
