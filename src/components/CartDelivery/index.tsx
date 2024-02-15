@@ -6,9 +6,10 @@ import * as S from './styles'
 
 type Props = {
   toCart: () => void
+  toPayment: () => void
 }
 
-const CartDelivery = ({ toCart }: Props) => {
+const CartDelivery = ({ toCart, toPayment }: Props) => {
   const form = useFormik({
     initialValues: {
       receiver: '',
@@ -50,6 +51,11 @@ const CartDelivery = ({ toCart }: Props) => {
 
     if (isTouched && isInvalid) return message
     return ''
+  }
+
+  const submitAndAdvance = () => {
+    form.handleSubmit()
+    toPayment()
   }
 
   return (
@@ -137,7 +143,7 @@ const CartDelivery = ({ toCart }: Props) => {
         background="salmon"
         title="Avançar para o pagamento"
         type="wide"
-        onClick={form.handleSubmit}
+        onClick={submitAndAdvance}
       >
         Continuar com o pagamento
       </Button>

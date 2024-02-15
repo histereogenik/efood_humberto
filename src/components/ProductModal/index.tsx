@@ -22,7 +22,7 @@ const ProductModal = ({ isVisible, closeModal, menuItem }: Props) => {
     dispatch(open())
   }
 
-  const formatPrice = (price: number) => {
+  const formatPriceModal = (price: number) => {
     const formatedNumber = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
@@ -51,7 +51,7 @@ const ProductModal = ({ isVisible, closeModal, menuItem }: Props) => {
             background="salmon"
             onClick={addToCart}
           >
-            {formatPrice(menuItem.preco)}
+            {formatPriceModal(menuItem.preco)}
           </Button>
         </Infos>
       </ModalContainer>
