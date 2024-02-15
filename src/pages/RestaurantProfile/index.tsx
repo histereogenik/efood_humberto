@@ -8,6 +8,7 @@ import { useGetSelectedRestaurantQuery } from '../../services/api'
 
 const RestaurantProfile = () => {
   const { id } = useParams()
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { data: selectedRestaurant } = useGetSelectedRestaurantQuery(id!)
 
   if (!selectedRestaurant) {

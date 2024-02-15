@@ -1,4 +1,6 @@
 import { useFormik } from 'formik'
+import * as Yup from 'yup'
+
 import Button from '../Button'
 import * as S from './styles'
 
@@ -16,12 +18,39 @@ const CartDelivery = ({ toCart }: Props) => {
       number: '',
       complement: ''
     },
+    validationSchema: Yup.object({
+      receiver: Yup.string()
+        .min(3, 'O nome precisa ter pelo menos 3 caracteres')
+        .required('O campo é obrigatório'),
+      description: Yup.string()
+        .min(5, 'O endereço precisa ter pelo menos 5 caracteres')
+        .required('O campo é obrigatório'),
+      city: Yup.string()
+        .min(3, 'O nome da cidade precisa ter pelo menos 3 caracteres')
+        .required('O campo é obrigatório'),
+      zipCode: Yup.string()
+        .min(8, 'Algo está errado, confira novamente')
+        .required('O campo é obrigatório'),
+      number: Yup.string()
+        .min(1, 'Algo está errado, confira novamente')
+        .required('O campo é obrigatório'),
+      complement: Yup.string().min(
+        3,
+        'O campo precisa ter pelo menos 3 caracteres'
+      )
+    }),
     onSubmit: (values) => {
       console.log(values)
     }
   })
 
-  console.log(form)
+  const getErrorMessage = (fieldName: string, message?: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+
+    if (isTouched && isInvalid) return message
+    return ''
+  }
 
   return (
     <S.DeliveryContainer>
@@ -37,6 +66,7 @@ const CartDelivery = ({ toCart }: Props) => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />
+          <small>{getErrorMessage('receiver', form.errors.receiver)}</small>
         </S.InputGroup>
         <S.InputGroup>
           <label htmlFor="description">Endereço</label>
@@ -48,6 +78,9 @@ const CartDelivery = ({ toCart }: Props) => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />
+          <small>
+            {getErrorMessage('description', form.errors.description)}
+          </small>
         </S.InputGroup>
         <S.InputGroup>
           <label htmlFor="city">Cidade</label>
@@ -59,6 +92,7 @@ const CartDelivery = ({ toCart }: Props) => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />
+          <small>{getErrorMessage('city', form.errors.city)}</small>
         </S.InputGroup>
         <S.NumbersGroup>
           <S.InputGroup>
@@ -71,6 +105,7 @@ const CartDelivery = ({ toCart }: Props) => {
               onChange={form.handleChange}
               onBlur={form.handleBlur}
             />
+            <small>{getErrorMessage('zipCode', form.errors.zipCode)}</small>
           </S.InputGroup>
           <S.InputGroup>
             <label htmlFor="number">Número</label>
@@ -82,6 +117,7 @@ const CartDelivery = ({ toCart }: Props) => {
               onChange={form.handleChange}
               onBlur={form.handleBlur}
             />
+            <small>{getErrorMessage('number', form.errors.number)}</small>
           </S.InputGroup>
         </S.NumbersGroup>
         <S.InputGroup>
@@ -94,6 +130,7 @@ const CartDelivery = ({ toCart }: Props) => {
             onChange={form.handleChange}
             onBlur={form.handleBlur}
           />
+          <small>{getErrorMessage('complement', form.errors.complement)}</small>
         </S.InputGroup>
       </form>
       <Button
