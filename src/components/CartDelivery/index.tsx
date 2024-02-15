@@ -1,3 +1,4 @@
+import { useFormik } from 'formik'
 import Button from '../Button'
 import * as S from './styles'
 
@@ -6,38 +7,101 @@ type Props = {
 }
 
 const CartDelivery = ({ toCart }: Props) => {
+  const form = useFormik({
+    initialValues: {
+      receiver: '',
+      description: '',
+      city: '',
+      zipCode: '',
+      number: '',
+      complement: ''
+    },
+    onSubmit: (values) => {
+      console.log(values)
+    }
+  })
+
+  console.log(form)
+
   return (
     <S.DeliveryContainer>
-      <form>
+      <form onSubmit={form.handleSubmit}>
         <h3>Entrega</h3>
         <S.InputGroup>
           <label htmlFor="receiver">Quem irá receber</label>
-          <input id="receiver" type="text" name="receiver" />
+          <input
+            id="receiver"
+            type="text"
+            name="receiver"
+            value={form.values.receiver}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+          />
         </S.InputGroup>
         <S.InputGroup>
           <label htmlFor="description">Endereço</label>
-          <input id="description" type="text" name="description" />
+          <input
+            id="description"
+            type="text"
+            name="description"
+            value={form.values.description}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+          />
         </S.InputGroup>
         <S.InputGroup>
           <label htmlFor="city">Cidade</label>
-          <input id="city" type="text" name="city" />
+          <input
+            id="city"
+            type="text"
+            name="city"
+            value={form.values.city}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+          />
         </S.InputGroup>
         <S.NumbersGroup>
           <S.InputGroup>
             <label htmlFor="zipCode">CEP</label>
-            <input id="zipCode" type="text" name="zipCode" />
+            <input
+              id="zipCode"
+              type="text"
+              name="zipCode"
+              value={form.values.zipCode}
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
+            />
           </S.InputGroup>
           <S.InputGroup>
             <label htmlFor="number">Número</label>
-            <input id="number" type="text" name="number" />
+            <input
+              id="number"
+              type="text"
+              name="number"
+              value={form.values.number}
+              onChange={form.handleChange}
+              onBlur={form.handleBlur}
+            />
           </S.InputGroup>
         </S.NumbersGroup>
         <S.InputGroup>
           <label htmlFor="complement">Complemento (opcional)</label>
-          <input id="complement" type="text" name="complement" />
+          <input
+            id="complement"
+            type="text"
+            name="complement"
+            value={form.values.complement}
+            onChange={form.handleChange}
+            onBlur={form.handleBlur}
+          />
         </S.InputGroup>
       </form>
-      <Button background="salmon" title="Avançar para o pagamento" type="wide">
+      <Button
+        background="salmon"
+        title="Avançar para o pagamento"
+        type="wide"
+        onClick={form.handleSubmit}
+      >
         Continuar com o pagamento
       </Button>
       <S.ButtonWrapper>
