@@ -73,7 +73,35 @@ const CartCheckout = ({ toCart, totalPrice }: Props) => {
         .required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
-      console.log(values)
+      purchase({
+        delivery: {
+          receiver: values.receiver,
+          address: {
+            description: values.description,
+            city: values.city,
+            zipCode: values.zipCode,
+            number: Number(values.addressNumber),
+            complement: values.complement
+          }
+        },
+        payment: {
+          card: {
+            name: values.name,
+            number: values.cardNumber,
+            code: Number(values.code),
+            expires: {
+              month: Number(values.month),
+              year: Number(values.year)
+            }
+          }
+        },
+        products: [
+          {
+            id: 1,
+            price: 69
+          }
+        ]
+      })
     }
   })
 
