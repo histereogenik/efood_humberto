@@ -12,8 +12,7 @@ import {
   Sidebar,
   TotalPrice
 } from './styles'
-import CartDelivery from '../CartDelivery'
-import CartPayment from '../CartPayment'
+import CartCheckout from '../CartCheckout'
 
 export const formatPrice = (price: number) => {
   const formatedNumber = new Intl.NumberFormat('pt-BR', {
@@ -28,8 +27,7 @@ const Cart = () => {
   const dispatch = useDispatch()
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
   const [goToCart, setGoToCart] = useState(true)
-  const [goToDelivery, setGoToDelivery] = useState(false)
-  const [goToPayment, setGoToPayment] = useState(false)
+  const [goToCheckout, setGoToCheckout] = useState(false)
 
   const closeCart = () => {
     dispatch(close())
@@ -41,12 +39,7 @@ const Cart = () => {
 
   const changeCartAndDelivery = () => {
     setGoToCart(!goToCart)
-    setGoToDelivery(!goToDelivery)
-  }
-
-  const changeDeliveryAndPayment = () => {
-    setGoToDelivery(!goToDelivery)
-    setGoToPayment(!goToPayment)
+    setGoToCheckout(!goToCheckout)
   }
 
   const getTotalPrice = () => {
@@ -88,16 +81,10 @@ const Cart = () => {
             </Button>
           </div>
         )}
-        {goToDelivery && (
-          <CartDelivery
-            toCart={changeCartAndDelivery}
-            toPayment={changeDeliveryAndPayment}
-          />
-        )}
-        {goToPayment && (
-          <CartPayment
-            toPayment={changeDeliveryAndPayment}
+        {goToCheckout && (
+          <CartCheckout
             totalPrice={formatPrice(getTotalPrice())}
+            toCart={changeCartAndDelivery}
           />
         )}
       </Sidebar>

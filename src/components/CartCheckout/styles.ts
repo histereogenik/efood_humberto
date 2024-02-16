@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
 
-export const DeliveryContainer = styled.div`
+export const CheckoutContainer = styled.div`
   color: ${colors.cream};
   font-weight: 700;
 
