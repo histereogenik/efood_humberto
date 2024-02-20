@@ -1,12 +1,13 @@
 import { useDispatch } from 'react-redux'
 
-import { add, open } from '../../store/reducers/cart'
-
 import Button from '../Button'
+
+import { add, open } from '../../store/reducers/cart'
 import { MenuItem } from '../../pages/Home'
 
-import { Modal, ModalContainer, Infos, CloseBtn, ProductImage } from './styles'
 import close from '../../assets/close.png'
+
+import * as S from './styles'
 
 type Props = {
   isVisible: boolean
@@ -32,13 +33,13 @@ const ProductModal = ({ isVisible, closeModal, menuItem }: Props) => {
   }
 
   return (
-    <Modal className={isVisible ? 'visible' : ''}>
-      <ModalContainer className="container">
-        <CloseBtn src={close} alt="close" onClick={closeModal} />
+    <S.Modal className={isVisible ? 'visible' : ''}>
+      <S.ModalContainer className="container">
+        <S.CloseBtn src={close} alt="close" onClick={closeModal} />
         <div>
-          <ProductImage src={menuItem.foto} />
+          <S.ProductImage src={menuItem.foto} />
         </div>
-        <Infos>
+        <S.Infos>
           <h4>{menuItem.nome}</h4>
           <p>
             {menuItem.descricao}
@@ -53,10 +54,10 @@ const ProductModal = ({ isVisible, closeModal, menuItem }: Props) => {
           >
             {formatPriceModal(menuItem.preco)}
           </Button>
-        </Infos>
-      </ModalContainer>
+        </S.Infos>
+      </S.ModalContainer>
       <div className="overlay" onClick={closeModal}></div>
-    </Modal>
+    </S.Modal>
   )
 }
 

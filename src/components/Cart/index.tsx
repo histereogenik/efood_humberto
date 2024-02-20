@@ -1,18 +1,13 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import CartCheckout from '../CartCheckout'
+import Button from '../Button'
+
 import { RootReducer } from '../../store'
 import { close, remove, reset } from '../../store/reducers/cart'
 
-import Button from '../Button'
-import {
-  CartContainer,
-  CartProduct,
-  Overlay,
-  Sidebar,
-  TotalPrice
-} from './styles'
-import CartCheckout from '../CartCheckout'
+import * as S from './styles'
 
 export const formatPrice = (price: number) => {
   const formatedNumber = new Intl.NumberFormat('pt-BR', {
@@ -56,27 +51,27 @@ const Cart = () => {
   }
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart}></Overlay>
-      <Sidebar>
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart}></S.Overlay>
+      <S.Sidebar>
         {goToCart && (
           <div>
             <ul>
               {items.map((item) => (
-                <CartProduct key={item.id}>
+                <S.CartProduct key={item.id}>
                   <img src={item.foto} alt={item.nome} />
                   <div>
                     <h3>{item.nome}</h3>
                     <span>{formatPrice(item.preco)}</span>
                   </div>
                   <button type="button" onClick={() => removeItem(item.id)} />
-                </CartProduct>
+                </S.CartProduct>
               ))}
             </ul>
-            <TotalPrice>
+            <S.TotalPrice>
               <span>Valor Total</span>
               <span>{formatPrice(getTotalPrice())}</span>
-            </TotalPrice>
+            </S.TotalPrice>
             <Button
               background="salmon"
               title="Avançar para o endereço"
@@ -94,8 +89,8 @@ const Cart = () => {
             finishPurchase={finishPurchase}
           />
         )}
-      </Sidebar>
-    </CartContainer>
+      </S.Sidebar>
+    </S.CartContainer>
   )
 }
 

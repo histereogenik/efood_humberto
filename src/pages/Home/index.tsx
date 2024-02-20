@@ -1,7 +1,7 @@
-import { useGetRestaurantsQuery } from '../../services/api'
-
 import Hero from '../../components/Hero'
 import RestaurantList from '../../components/RestaurantList'
+
+import { useGetRestaurantsQuery } from '../../services/api'
 
 export interface MenuItem {
   foto: string

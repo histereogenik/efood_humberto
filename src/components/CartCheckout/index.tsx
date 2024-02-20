@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
+import Button from '../Button'
+
 import { usePurchaseMutation } from '../../services/api'
 
-import Button from '../Button'
 import * as S from './styles'
 
 type Props = {
@@ -16,8 +17,7 @@ type Props = {
 const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
   const [goToDelivery, setGoToDelivery] = useState(true)
   const [goToPayment, setGoToPayment] = useState(false)
-  const [purchase, { data, isLoading, isError, isSuccess }] =
-    usePurchaseMutation()
+  const [purchase, { data, isSuccess }] = usePurchaseMutation()
 
   const form = useFormik({
     initialValues: {

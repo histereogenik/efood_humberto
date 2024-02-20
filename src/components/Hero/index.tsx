@@ -1,6 +1,6 @@
-import { Logo, Description, HeroContainer } from './styles'
-
 import logoImg from '../../assets/efood_logo.svg'
+
+import { Logo, Description, HeroContainer } from './styles'
 
 const Hero = () => (
   <HeroContainer>
