@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
-import { close, remove } from '../../store/reducers/cart'
+import { close, remove, reset } from '../../store/reducers/cart'
 
 import Button from '../Button'
 import {
@@ -40,6 +40,12 @@ const Cart = () => {
   const changeCartAndDelivery = () => {
     setGoToCart(!goToCart)
     setGoToCheckout(!goToCheckout)
+  }
+
+  const finishPurchase = () => {
+    dispatch(reset())
+    closeCart()
+    changeCartAndDelivery()
   }
 
   const getTotalPrice = () => {
@@ -85,6 +91,7 @@ const Cart = () => {
           <CartCheckout
             totalPrice={formatPrice(getTotalPrice())}
             toCart={changeCartAndDelivery}
+            finishPurchase={finishPurchase}
           />
         )}
       </Sidebar>

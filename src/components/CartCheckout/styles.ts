@@ -7,9 +7,17 @@ export const CheckoutContainer = styled.div`
 
   h3 {
     font-size: 16px;
+    margin-bottom: 16px;
   }
 
   form {
+    margin-bottom: 24px;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
     margin-bottom: 24px;
   }
 `

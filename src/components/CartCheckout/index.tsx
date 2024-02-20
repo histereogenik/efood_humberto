@@ -10,12 +10,14 @@ import * as S from './styles'
 type Props = {
   toCart: () => void
   totalPrice: string
+  finishPurchase: () => void
 }
 
-const CartCheckout = ({ toCart, totalPrice }: Props) => {
+const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
   const [goToDelivery, setGoToDelivery] = useState(true)
   const [goToPayment, setGoToPayment] = useState(false)
-  const [purchase, { data, isLoading, isError }] = usePurchaseMutation()
+  const [purchase, { data, isLoading, isError, isSuccess }] =
+    usePurchaseMutation()
 
   const form = useFormik({
     initialValues: {
@@ -120,202 +122,242 @@ const CartCheckout = ({ toCart, totalPrice }: Props) => {
 
   return (
     <S.CheckoutContainer>
-      {goToDelivery && (
+      {isSuccess ? (
         <>
-          <form onSubmit={form.handleSubmit}>
-            <h3>Entrega</h3>
-            <S.InputGroup>
-              <label htmlFor="receiver">Quem irá receber</label>
-              <input
-                id="receiver"
-                type="text"
-                name="receiver"
-                value={form.values.receiver}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <small>{getErrorMessage('receiver', form.errors.receiver)}</small>
-            </S.InputGroup>
-            <S.InputGroup>
-              <label htmlFor="description">Endereço</label>
-              <input
-                id="description"
-                type="text"
-                name="description"
-                value={form.values.description}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <small>
-                {getErrorMessage('description', form.errors.description)}
-              </small>
-            </S.InputGroup>
-            <S.InputGroup>
-              <label htmlFor="city">Cidade</label>
-              <input
-                id="city"
-                type="text"
-                name="city"
-                value={form.values.city}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <small>{getErrorMessage('city', form.errors.city)}</small>
-            </S.InputGroup>
-            <S.InfoGroup>
-              <S.InputGroup>
-                <label htmlFor="zipCode">CEP</label>
-                <input
-                  id="zipCode"
-                  type="text"
-                  name="zipCode"
-                  value={form.values.zipCode}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>{getErrorMessage('zipCode', form.errors.zipCode)}</small>
-              </S.InputGroup>
-              <S.InputGroup>
-                <label htmlFor="addressNumber">Número</label>
-                <input
-                  id="addressNumber"
-                  type="text"
-                  name="addressNumber"
-                  value={form.values.addressNumber}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>
-                  {getErrorMessage('addressNumber', form.errors.addressNumber)}
-                </small>
-              </S.InputGroup>
-            </S.InfoGroup>
-            <S.InputGroup>
-              <label htmlFor="complement">Complemento (opcional)</label>
-              <input
-                id="complement"
-                type="text"
-                name="complement"
-                value={form.values.complement}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <small>
-                {getErrorMessage('complement', form.errors.complement)}
-              </small>
-            </S.InputGroup>
-          </form>
+          <h3>Pedido realizado - {data.orderId}</h3>
+          <p>
+            Estamos felizes em informar que seu pedido já está em processo de
+            preparação e, em breve, será entregue no endereço fornecido.
+          </p>
+          <p>
+            Gostaríamos de ressaltar que nossos entregadores não estão
+            autorizados a realizar cobranças extras.
+          </p>
+          <p>
+            Lembre-se da importância de higienizar as mãos após o recebimento do
+            pedido, garantindo assim sua segurança e bem-estar durante a
+            refeição.
+          </p>
+          <p>
+            Esperamos que desfrute de uma deliciosa e agradável experiência
+            gastronômica. Bom apetite!
+          </p>
           <Button
             background="salmon"
-            title="Avançar para o pagamento"
+            title="Concluir"
             type="wide"
-            onClick={changeDeliveryAndPayment}
+            onClick={finishPurchase}
           >
-            Continuar com o pagamento
+            Concluir
           </Button>
-          <S.ButtonWrapper>
-            <Button
-              background="salmon"
-              title="Voltar para o carrinho"
-              type="wide"
-              onClick={toCart}
-            >
-              Voltar para o carrinho
-            </Button>
-          </S.ButtonWrapper>
         </>
-      )}
-      {goToPayment && (
+      ) : (
         <>
-          <form onSubmit={form.handleSubmit}>
-            <h3>Pagamento - Valor a pagar {totalPrice}</h3>
-            <S.InputGroup>
-              <label htmlFor="name">Nome no cartão</label>
-              <input
-                id="name"
-                type="text"
-                name="name"
-                value={form.values.name}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-              />
-              <small>{getErrorMessage('name', form.errors.name)}</small>
-            </S.InputGroup>
-            <S.InfoGroup>
-              <S.InputGroup>
-                <label htmlFor="cardNumber">Número do cartão</label>
-                <input
-                  className="cardNumber-width"
-                  id="cardNumber"
-                  type="text"
-                  name="cardNumber"
-                  value={form.values.cardNumber}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>
-                  {getErrorMessage('cardNumber', form.errors.cardNumber)}
-                </small>
-              </S.InputGroup>
-              <S.InputGroup>
-                <label htmlFor="city">CVV</label>
-                <input
-                  className="cvv-width"
-                  id="code"
-                  type="text"
-                  name="code"
-                  value={form.values.code}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>{getErrorMessage('code', form.errors.code)}</small>
-              </S.InputGroup>
-            </S.InfoGroup>
-            <S.InfoGroup>
-              <S.InputGroup>
-                <label htmlFor="month">Mês de vencimento</label>
-                <input
-                  id="month"
-                  type="text"
-                  name="month"
-                  value={form.values.month}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>{getErrorMessage('month', form.errors.month)}</small>
-              </S.InputGroup>
-              <S.InputGroup>
-                <label htmlFor="year">Ano de vencimento</label>
-                <input
-                  id="year"
-                  type="text"
-                  name="year"
-                  value={form.values.year}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                />
-                <small>{getErrorMessage('year', form.errors.year)}</small>
-              </S.InputGroup>
-            </S.InfoGroup>
-          </form>
-          <Button
-            background="salmon"
-            title="Finalizar o pagamento"
-            type="wide"
-            onClick={form.handleSubmit}
-          >
-            Finalizar pagamento
-          </Button>
-          <S.ButtonWrapper>
-            <Button
-              background="salmon"
-              title="Voltar para a edição de endereço"
-              type="wide"
-              onClick={changeDeliveryAndPayment}
-            >
-              Voltar para a edição de endereço
-            </Button>
-          </S.ButtonWrapper>
+          {goToDelivery && (
+            <>
+              <form onSubmit={form.handleSubmit}>
+                <h3>Entrega</h3>
+                <S.InputGroup>
+                  <label htmlFor="receiver">Quem irá receber</label>
+                  <input
+                    id="receiver"
+                    type="text"
+                    name="receiver"
+                    value={form.values.receiver}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>
+                    {getErrorMessage('receiver', form.errors.receiver)}
+                  </small>
+                </S.InputGroup>
+                <S.InputGroup>
+                  <label htmlFor="description">Endereço</label>
+                  <input
+                    id="description"
+                    type="text"
+                    name="description"
+                    value={form.values.description}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>
+                    {getErrorMessage('description', form.errors.description)}
+                  </small>
+                </S.InputGroup>
+                <S.InputGroup>
+                  <label htmlFor="city">Cidade</label>
+                  <input
+                    id="city"
+                    type="text"
+                    name="city"
+                    value={form.values.city}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>{getErrorMessage('city', form.errors.city)}</small>
+                </S.InputGroup>
+                <S.InfoGroup>
+                  <S.InputGroup>
+                    <label htmlFor="zipCode">CEP</label>
+                    <input
+                      id="zipCode"
+                      type="text"
+                      name="zipCode"
+                      value={form.values.zipCode}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                    />
+                    <small>
+                      {getErrorMessage('zipCode', form.errors.zipCode)}
+                    </small>
+                  </S.InputGroup>
+                  <S.InputGroup>
+                    <label htmlFor="addressNumber">Número</label>
+                    <input
+                      id="addressNumber"
+                      type="text"
+                      name="addressNumber"
+                      value={form.values.addressNumber}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                    />
+                    <small>
+                      {getErrorMessage(
+                        'addressNumber',
+                        form.errors.addressNumber
+                      )}
+                    </small>
+                  </S.InputGroup>
+                </S.InfoGroup>
+                <S.InputGroup>
+                  <label htmlFor="complement">Complemento (opcional)</label>
+                  <input
+                    id="complement"
+                    type="text"
+                    name="complement"
+                    value={form.values.complement}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>
+                    {getErrorMessage('complement', form.errors.complement)}
+                  </small>
+                </S.InputGroup>
+              </form>
+              <Button
+                background="salmon"
+                title="Avançar para o pagamento"
+                type="wide"
+                onClick={changeDeliveryAndPayment}
+              >
+                Continuar com o pagamento
+              </Button>
+              <S.ButtonWrapper>
+                <Button
+                  background="salmon"
+                  title="Voltar para o carrinho"
+                  type="wide"
+                  onClick={toCart}
+                >
+                  Voltar para o carrinho
+                </Button>
+              </S.ButtonWrapper>
+            </>
+          )}
+          {goToPayment && (
+            <>
+              <form onSubmit={form.handleSubmit}>
+                <h3>Pagamento - Valor a pagar {totalPrice}</h3>
+                <S.InputGroup>
+                  <label htmlFor="name">Nome no cartão</label>
+                  <input
+                    id="name"
+                    type="text"
+                    name="name"
+                    value={form.values.name}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                  />
+                  <small>{getErrorMessage('name', form.errors.name)}</small>
+                </S.InputGroup>
+                <S.InfoGroup>
+                  <S.InputGroup>
+                    <label htmlFor="cardNumber">Número do cartão</label>
+                    <input
+                      className="cardNumber-width"
+                      id="cardNumber"
+                      type="text"
+                      name="cardNumber"
+                      value={form.values.cardNumber}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                    />
+                    <small>
+                      {getErrorMessage('cardNumber', form.errors.cardNumber)}
+                    </small>
+                  </S.InputGroup>
+                  <S.InputGroup>
+                    <label htmlFor="city">CVV</label>
+                    <input
+                      className="cvv-width"
+                      id="code"
+                      type="text"
+                      name="code"
+                      value={form.values.code}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                    />
+                    <small>{getErrorMessage('code', form.errors.code)}</small>
+                  </S.InputGroup>
+                </S.InfoGroup>
+                <S.InfoGroup>
+                  <S.InputGroup>
+                    <label htmlFor="month">Mês de vencimento</label>
+                    <input
+                      id="month"
+                      type="text"
+                      name="month"
+                      value={form.values.month}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                    />
+                    <small>{getErrorMessage('month', form.errors.month)}</small>
+                  </S.InputGroup>
+                  <S.InputGroup>
+                    <label htmlFor="year">Ano de vencimento</label>
+                    <input
+                      id="year"
+                      type="text"
+                      name="year"
+                      value={form.values.year}
+                      onChange={form.handleChange}
+                      onBlur={form.handleBlur}
+                    />
+                    <small>{getErrorMessage('year', form.errors.year)}</small>
+                  </S.InputGroup>
+                </S.InfoGroup>
+              </form>
+              <Button
+                background="salmon"
+                title="Finalizar o pagamento"
+                type="wide"
+                onClick={form.handleSubmit}
+              >
+                Finalizar pagamento
+              </Button>
+              <S.ButtonWrapper>
+                <Button
+                  background="salmon"
+                  title="Voltar para a edição de endereço"
+                  type="wide"
+                  onClick={changeDeliveryAndPayment}
+                >
+                  Voltar para a edição de endereço
+                </Button>
+              </S.ButtonWrapper>
+            </>
+          )}
         </>
       )}
     </S.CheckoutContainer>
