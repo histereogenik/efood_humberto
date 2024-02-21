@@ -11,17 +11,17 @@ const Footer = () => (
       <S.LogoEfood src={logoEfood} alt="efood" />
       <S.Social>
         <li>
-          <a href="#">
+          <a title="Clique aqui para acessar o Instagram da loja" href="#">
             <img src={logoInstagram} alt="instagram" />
           </a>
         </li>
         <li>
-          <a href="#">
+          <a title="Clique aqui para acessar o Facebook da loja" href="#">
             <img src={logoFacebook} alt="facebook" />
           </a>
         </li>
         <li>
-          <a href="#">
+          <a title="Clique aqui para acessar o Twitter da loja" href="#">
             <img src={logoTwitter} alt="twitter" />
           </a>
         </li>

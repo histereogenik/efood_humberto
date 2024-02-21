@@ -20,9 +20,14 @@ const Header = () => {
   return (
     <S.HeaderContainer>
       <S.FlexContainer className="container">
-        <Link to="/">Restaurantes</Link>
+        <Link title="Clique aqui para acessar a página de restaurantes" to="/">
+          Restaurantes
+        </Link>
         <S.Logo src={logoImg} alt="efood" />
-        <S.CartButton onClick={openCart}>
+        <S.CartButton
+          title="Clique aqui para abrir o carrinho"
+          onClick={openCart}
+        >
           {items.length} <span>produto(s) no carrinho</span>{' '}
           <img src={cartImg} alt="Cart image" />{' '}
         </S.CartButton>
