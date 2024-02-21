@@ -6,6 +6,9 @@ export const HeaderContainer = styled.header`
   padding: 64px 0;
   background-image: url('${heroBg}');
   height: 168px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 
   @media (max-width: ${breakpoints.tablet}) {
     padding: 32px 0;
