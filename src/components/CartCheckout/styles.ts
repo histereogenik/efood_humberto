@@ -39,6 +39,10 @@ export const InputGroup = styled.div`
     font-weight: 700;
     padding: 0 8px;
     border: 1px solid ${colors.cream};
+
+    &.error {
+      border: 1px solid red;
+    }
   }
 
   .number-width {

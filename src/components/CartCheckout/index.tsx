@@ -45,6 +45,7 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
         .required('O campo é obrigatório'),
       zipCode: Yup.string()
         .min(8, 'Algo está errado, confira novamente')
+        .max(8, 'Algo está errado, confira novamente')
         .required('O campo é obrigatório'),
       addressNumber: Yup.string()
         .min(1, 'Algo está errado, confira novamente')
@@ -107,12 +108,12 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
     }
   })
 
-  const getErrorMessage = (fieldName: string, message?: string) => {
+  const checkInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched
     const isInvalid = fieldName in form.errors
+    const hasError = isTouched && isInvalid
 
-    if (isTouched && isInvalid) return message
-    return ''
+    return hasError
   }
 
   const changeDeliveryAndPayment = () => {
@@ -166,10 +167,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                     value={form.values.receiver}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('receiver') ? 'error' : ''}
                   />
-                  <small>
-                    {getErrorMessage('receiver', form.errors.receiver)}
-                  </small>
                 </S.InputGroup>
                 <S.InputGroup>
                   <label htmlFor="description">Endereço</label>
@@ -180,10 +179,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                     value={form.values.description}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('description') ? 'error' : ''}
                   />
-                  <small>
-                    {getErrorMessage('description', form.errors.description)}
-                  </small>
                 </S.InputGroup>
                 <S.InputGroup>
                   <label htmlFor="city">Cidade</label>
@@ -194,8 +191,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                     value={form.values.city}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('city') ? 'error' : ''}
                   />
-                  <small>{getErrorMessage('city', form.errors.city)}</small>
                 </S.InputGroup>
                 <S.InfoGroup>
                   <S.InputGroup>
@@ -207,10 +204,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       value={form.values.zipCode}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={checkInputHasError('zipCode') ? 'error' : ''}
                     />
-                    <small>
-                      {getErrorMessage('zipCode', form.errors.zipCode)}
-                    </small>
                   </S.InputGroup>
                   <S.InputGroup>
                     <label htmlFor="addressNumber">Número</label>
@@ -221,13 +216,10 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       value={form.values.addressNumber}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={
+                        checkInputHasError('addressNumber') ? 'error' : ''
+                      }
                     />
-                    <small>
-                      {getErrorMessage(
-                        'addressNumber',
-                        form.errors.addressNumber
-                      )}
-                    </small>
                   </S.InputGroup>
                 </S.InfoGroup>
                 <S.InputGroup>
@@ -239,10 +231,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                     value={form.values.complement}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('complement') ? 'error' : ''}
                   />
-                  <small>
-                    {getErrorMessage('complement', form.errors.complement)}
-                  </small>
                 </S.InputGroup>
               </form>
               <Button
@@ -278,14 +268,16 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                     value={form.values.name}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    className={checkInputHasError('name') ? 'error' : ''}
                   />
-                  <small>{getErrorMessage('name', form.errors.name)}</small>
                 </S.InputGroup>
                 <S.InfoGroup>
                   <S.InputGroup>
                     <label htmlFor="cardNumber">Número do cartão</label>
                     <input
-                      className="cardNumber-width"
+                      className={`cardNumber-width ${
+                        checkInputHasError('cardNumber') ? 'error' : ''
+                      }`}
                       id="cardNumber"
                       type="text"
                       name="cardNumber"
@@ -293,14 +285,13 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                     />
-                    <small>
-                      {getErrorMessage('cardNumber', form.errors.cardNumber)}
-                    </small>
                   </S.InputGroup>
                   <S.InputGroup>
-                    <label htmlFor="city">CVV</label>
+                    <label htmlFor="code">CVV</label>
                     <input
-                      className="cvv-width"
+                      className={`cvv-width ${
+                        checkInputHasError('code') ? 'error' : ''
+                      }`}
                       id="code"
                       type="text"
                       name="code"
@@ -308,7 +299,6 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                     />
-                    <small>{getErrorMessage('code', form.errors.code)}</small>
                   </S.InputGroup>
                 </S.InfoGroup>
                 <S.InfoGroup>
@@ -321,8 +311,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       value={form.values.month}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={checkInputHasError('month') ? 'error' : ''}
                     />
-                    <small>{getErrorMessage('month', form.errors.month)}</small>
                   </S.InputGroup>
                   <S.InputGroup>
                     <label htmlFor="year">Ano de vencimento</label>
@@ -333,8 +323,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       value={form.values.year}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      className={checkInputHasError('year') ? 'error' : ''}
                     />
-                    <small>{getErrorMessage('year', form.errors.year)}</small>
                   </S.InputGroup>
                 </S.InfoGroup>
               </form>
