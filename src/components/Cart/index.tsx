@@ -37,8 +37,10 @@ const Cart = () => {
 
   const getTotalPrice = () => {
     return items.reduce((accumulator, currentValue) => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      return (accumulator += currentValue.preco!)
+      if (currentValue.preco) {
+        return (accumulator += currentValue.preco)
+      }
+      return 0
     }, 0)
   }
 

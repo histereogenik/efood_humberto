@@ -51,8 +51,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
         .min(1, 'Algo está errado, confira novamente')
         .required('O campo é obrigatório'),
       complement: Yup.string().min(
-        3,
-        'O campo precisa ter pelo menos 3 caracteres'
+        1,
+        'O campo precisa ter pelo menos 1 caractere'
       ),
 
       name: Yup.string()
@@ -117,8 +117,30 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
   }
 
   const changeDeliveryAndPayment = () => {
-    setGoToDelivery(!goToDelivery)
-    setGoToPayment(!goToPayment)
+    if (Object.keys(form.touched).length > 0) {
+      const fieldsToValidate = goToDelivery
+        ? ['receiver', 'description', 'city', 'zipCode', 'addressNumber']
+        : ['name', 'cardNumber', 'code', 'month', 'year']
+
+      const errors = fieldsToValidate.reduce((acc, fieldName) => {
+        const fieldError = form.errors[fieldName as keyof typeof form.values]
+        if (fieldError) {
+          acc[fieldName] = fieldError as string
+        }
+        return acc
+      }, {} as Record<string, string>)
+
+      if (Object.keys(errors).length === 0) {
+        setGoToDelivery(!goToDelivery)
+        setGoToPayment(!goToPayment)
+      } else {
+        alert('Por favor, preencha todos os campos obrigatórios corretamente')
+      }
+    } else {
+      alert(
+        'Por favor, preencha todos os campos obrigatórios antes de prosseguir'
+      )
+    }
   }
 
   return (
@@ -231,7 +253,6 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                     value={form.values.complement}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
-                    className={checkInputHasError('complement') ? 'error' : ''}
                   />
                 </S.InputGroup>
               </form>
