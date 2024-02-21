@@ -6,17 +6,9 @@ import Button from '../Button'
 
 import { RootReducer } from '../../store'
 import { close, remove, reset } from '../../store/reducers/cart'
+import { parseToBrl } from '../../utils'
 
 import * as S from './styles'
-
-export const formatPrice = (price: number) => {
-  const formatedNumber = new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(price)
-
-  return formatedNumber
-}
 
 const Cart = () => {
   const dispatch = useDispatch()
@@ -62,7 +54,7 @@ const Cart = () => {
                   <img src={item.foto} alt={item.nome} />
                   <div>
                     <h3>{item.nome}</h3>
-                    <span>{formatPrice(item.preco)}</span>
+                    <span>{parseToBrl(item.preco)}</span>
                   </div>
                   <button type="button" onClick={() => removeItem(item.id)} />
                 </S.CartProduct>
@@ -70,7 +62,7 @@ const Cart = () => {
             </ul>
             <S.TotalPrice>
               <span>Valor Total</span>
-              <span>{formatPrice(getTotalPrice())}</span>
+              <span>{parseToBrl(getTotalPrice())}</span>
             </S.TotalPrice>
             <Button
               background="salmon"
@@ -84,7 +76,7 @@ const Cart = () => {
         )}
         {goToCheckout && (
           <CartCheckout
-            totalPrice={formatPrice(getTotalPrice())}
+            totalPrice={parseToBrl(getTotalPrice())}
             toCart={changeCartAndDelivery}
             finishPurchase={finishPurchase}
           />

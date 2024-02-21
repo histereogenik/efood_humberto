@@ -4,6 +4,7 @@ import Button from '../Button'
 
 import { add, open } from '../../store/reducers/cart'
 import { MenuItem } from '../../pages/Home'
+import { parseToBrl } from '../../utils'
 
 import close from '../../assets/close.png'
 
@@ -24,10 +25,7 @@ const ProductModal = ({ isVisible, closeModal, menuItem }: Props) => {
   }
 
   const formatPriceModal = (price: number) => {
-    const formatedNumber = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price)
+    const formatedNumber = parseToBrl(price)
 
     return 'Adicionar ao carrinho - ' + formatedNumber
   }
