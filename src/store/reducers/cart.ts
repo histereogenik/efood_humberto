@@ -33,7 +33,7 @@ const cartSlice = createSlice({
       state.isOpen = false
     },
     reset: (state) => {
-      state.items.splice(0, state.items.length)
+      state.items = []
     }
   }
 })

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import InputMask from 'react-input-mask'
 
 import Button from '../Button'
 
@@ -12,9 +13,10 @@ type Props = {
   toCart: () => void
   totalPrice: string
   finishPurchase: () => void
+  items: MenuItem[]
 }
 
-const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
+const CartCheckout = ({ toCart, totalPrice, finishPurchase, items }: Props) => {
   const [goToDelivery, setGoToDelivery] = useState(true)
   const [goToPayment, setGoToPayment] = useState(false)
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
@@ -44,8 +46,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
         .min(3, 'O nome da cidade precisa ter pelo menos 3 caracteres')
         .required('O campo é obrigatório'),
       zipCode: Yup.string()
-        .min(8, 'Algo está errado, confira novamente')
-        .max(8, 'Algo está errado, confira novamente')
+        .min(9, 'Algo está errado, confira novamente')
+        .max(9, 'Algo está errado, confira novamente')
         .required('O campo é obrigatório'),
       addressNumber: Yup.string()
         .min(1, 'Algo está errado, confira novamente')
@@ -59,8 +61,8 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
         .min(3, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
       cardNumber: Yup.string()
-        .min(16, 'Insira um cartão válido')
-        .max(16, 'Insira um cartão válido')
+        .min(19, 'Insira um cartão válido')
+        .max(19, 'Insira um cartão válido')
         .required('O campo é obrigatório'),
       code: Yup.string()
         .min(3, 'O código precisa ter 3 caracteres')
@@ -98,12 +100,10 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
             }
           }
         },
-        products: [
-          {
-            id: 1,
-            price: 69
-          }
-        ]
+        products: items.map((i) => ({
+          id: i.id,
+          price: i.preco
+        }))
       })
     }
   })
@@ -219,7 +219,7 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                 <S.InfoGroup>
                   <S.InputGroup>
                     <label htmlFor="zipCode">CEP</label>
-                    <input
+                    <InputMask
                       id="zipCode"
                       type="text"
                       name="zipCode"
@@ -227,13 +227,14 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       className={checkInputHasError('zipCode') ? 'error' : ''}
+                      mask="99999-999"
                     />
                   </S.InputGroup>
                   <S.InputGroup>
                     <label htmlFor="addressNumber">Número</label>
                     <input
                       id="addressNumber"
-                      type="text"
+                      type="number"
                       name="addressNumber"
                       value={form.values.addressNumber}
                       onChange={form.handleChange}
@@ -295,7 +296,7 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                 <S.InfoGroup>
                   <S.InputGroup>
                     <label htmlFor="cardNumber">Número do cartão</label>
-                    <input
+                    <InputMask
                       className={`cardNumber-width ${
                         checkInputHasError('cardNumber') ? 'error' : ''
                       }`}
@@ -305,11 +306,12 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       value={form.values.cardNumber}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      mask="9999 9999 9999 9999"
                     />
                   </S.InputGroup>
                   <S.InputGroup>
                     <label htmlFor="code">CVV</label>
-                    <input
+                    <InputMask
                       className={`cvv-width ${
                         checkInputHasError('code') ? 'error' : ''
                       }`}
@@ -319,13 +321,14 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       value={form.values.code}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      mask="999"
                     />
                   </S.InputGroup>
                 </S.InfoGroup>
                 <S.InfoGroup>
                   <S.InputGroup>
                     <label htmlFor="month">Mês de vencimento</label>
-                    <input
+                    <InputMask
                       id="month"
                       type="text"
                       name="month"
@@ -333,11 +336,12 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       className={checkInputHasError('month') ? 'error' : ''}
+                      mask="99"
                     />
                   </S.InputGroup>
                   <S.InputGroup>
                     <label htmlFor="year">Ano de vencimento</label>
-                    <input
+                    <InputMask
                       id="year"
                       type="text"
                       name="year"
@@ -345,6 +349,7 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       className={checkInputHasError('year') ? 'error' : ''}
+                      mask="99"
                     />
                   </S.InputGroup>
                 </S.InfoGroup>

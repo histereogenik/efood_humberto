@@ -5,7 +5,9 @@ import { Logo, Description, HeroContainer } from './styles'
 const Hero = () => (
   <HeroContainer>
     <div className="container">
-      <Logo src={logoImg} alt="efood" />
+      <h1>
+        <Logo src={logoImg} alt="efood" />
+      </h1>
       <Description>
         Viva experiências gastronômicas <br />
         no conforto da sua casa

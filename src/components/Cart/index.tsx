@@ -18,6 +18,8 @@ const Cart = () => {
 
   const closeCart = () => {
     dispatch(close())
+    setGoToCart(true)
+    setGoToCheckout(false)
   }
 
   const removeItem = (id: number) => {
@@ -93,6 +95,7 @@ const Cart = () => {
             totalPrice={parseToBrl(getTotalPrice())}
             toCart={changeCartAndDelivery}
             finishPurchase={finishPurchase}
+            items={items}
           />
         )}
       </S.Sidebar>
