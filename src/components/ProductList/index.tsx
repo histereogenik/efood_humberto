@@ -1,7 +1,5 @@
 import ProductCard from '../ProductCard'
 
-import { MenuItem } from '../../pages/Home'
-
 import { ProductsContainer } from './styles'
 
 type Props = {

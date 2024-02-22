@@ -49,32 +49,44 @@ const Cart = () => {
       <S.Overlay onClick={closeCart}></S.Overlay>
       <S.Sidebar>
         {goToCart && (
-          <div>
-            <ul>
-              {items.map((item) => (
-                <S.CartProduct key={item.id}>
-                  <img src={item.foto} alt={item.nome} />
-                  <div>
-                    <h3>{item.nome}</h3>
-                    <span>{parseToBrl(item.preco)}</span>
-                  </div>
-                  <button type="button" onClick={() => removeItem(item.id)} />
-                </S.CartProduct>
-              ))}
-            </ul>
-            <S.TotalPrice>
-              <span>Valor Total</span>
-              <span>{parseToBrl(getTotalPrice())}</span>
-            </S.TotalPrice>
-            <Button
-              background="salmon"
-              title="Avançar para o endereço"
-              type="wide"
-              onClick={changeCartAndDelivery}
-            >
-              Continuar com a entrega
-            </Button>
-          </div>
+          <>
+            {items.length > 0 ? (
+              <>
+                <ul>
+                  {items.map((item) => (
+                    <S.CartProduct key={item.id}>
+                      <img src={item.foto} alt={item.nome} />
+                      <div>
+                        <h3>{item.nome}</h3>
+                        <span>{parseToBrl(item.preco)}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeItem(item.id)}
+                      />
+                    </S.CartProduct>
+                  ))}
+                </ul>
+                <S.TotalPrice>
+                  <span>Valor Total</span>
+                  <span>{parseToBrl(getTotalPrice())}</span>
+                </S.TotalPrice>
+                <Button
+                  background="salmon"
+                  title="Avançar para o endereço"
+                  type="wide"
+                  onClick={changeCartAndDelivery}
+                >
+                  Continuar com a entrega
+                </Button>
+              </>
+            ) : (
+              <p className="empty-cart-text">
+                O seu carrinho está vazio, adicione algum item para continuar
+                com a compra
+              </p>
+            )}
+          </>
         )}
         {goToCheckout && (
           <CartCheckout

@@ -36,6 +36,13 @@ export const Sidebar = styled.aside`
   > button {
     margin-bottom: 16px;
   }
+
+  .empty-cart-text {
+    font-size: 14px;
+    line-height: 22px;
+    color: ${colors.cream};
+    text-align: center;
+  }
 `
 export const TotalPrice = styled.div`
   display: flex;

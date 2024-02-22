@@ -1,8 +1,6 @@
 import RestaurantCard from '../RestaurantCard'
 import Loader from '../Loader'
 
-import { Restaurant } from '../../pages/Home'
-
 import { List } from './styles'
 
 type Props = {

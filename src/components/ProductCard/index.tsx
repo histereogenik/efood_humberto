@@ -3,8 +3,6 @@ import { useState } from 'react'
 import ProductModal from '../ProductModal'
 import Button from '../Button'
 
-import { MenuItem } from '../../pages/Home'
-
 import * as S from './styles'
 
 type Props = {

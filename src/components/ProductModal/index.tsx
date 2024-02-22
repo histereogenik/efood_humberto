@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import Button from '../Button'
 
 import { add, open } from '../../store/reducers/cart'
-import { MenuItem } from '../../pages/Home'
 import { parseToBrl } from '../../utils'
 
 import close from '../../assets/close.png'

@@ -17,7 +17,7 @@ type Props = {
 const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
   const [goToDelivery, setGoToDelivery] = useState(true)
   const [goToPayment, setGoToPayment] = useState(false)
-  const [purchase, { data, isSuccess }] = usePurchaseMutation()
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
 
   const form = useFormik({
     initialValues: {
@@ -145,7 +145,7 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
 
   return (
     <S.CheckoutContainer>
-      {isSuccess ? (
+      {isSuccess && data ? (
         <>
           <h3>Pedido realizado - {data.orderId}</h3>
           <p>
@@ -354,8 +354,9 @@ const CartCheckout = ({ toCart, totalPrice, finishPurchase }: Props) => {
                 title="Finalizar o pagamento"
                 type="wide"
                 onClick={form.handleSubmit}
+                disabled={isLoading}
               >
-                Finalizar pagamento
+                {isLoading ? 'Finalizando compra...' : 'Finalizar compra'}
               </Button>
               <S.ButtonWrapper>
                 <Button
