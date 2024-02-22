@@ -6,6 +6,9 @@ export const HeaderContainer = styled.header`
   padding: 64px 0;
   background-image: url('${heroBg}');
   height: 168px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 
   @media (max-width: ${breakpoints.tablet}) {
     padding: 32px 0;
@@ -34,5 +37,20 @@ export const Logo = styled.img`
 
   @media (max-width: ${breakpoints.tablet}) {
     display: none;
+  }
+`
+export const CartButton = styled.a`
+  display: flex;
+  column-gap: 4px;
+
+  img {
+    width: 100%;
+    max-width: 18px;
+  }
+
+  span {
+    @media (max-width: ${breakpoints.tablet}) {
+      display: none;
+    }
   }
 `

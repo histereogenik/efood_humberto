@@ -5,13 +5,18 @@ import ProfileBanner from '../../components/ProfileBanner'
 import ProductList from '../../components/ProductList'
 
 import { useGetSelectedRestaurantQuery } from '../../services/api'
+import Loader from '../../components/Loader'
+
+type GameParams = {
+  id: string
+}
 
 const RestaurantProfile = () => {
-  const { id } = useParams()
-  const { data: selectedRestaurant } = useGetSelectedRestaurantQuery(id!)
+  const { id } = useParams() as GameParams
+  const { data: selectedRestaurant } = useGetSelectedRestaurantQuery(id)
 
   if (!selectedRestaurant) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   return (

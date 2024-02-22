@@ -6,6 +6,10 @@ export const HeroContainer = styled.div`
   padding: 40px 0;
   background-image: url('${heroBg}');
   text-align: center;
+
+  h1 {
+    line-height: 0;
+  }
 `
 export const Logo = styled.img`
   width: 125px;

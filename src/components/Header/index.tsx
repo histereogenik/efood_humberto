@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom'
 import { RootReducer } from '../../store'
 import { open } from '../../store/reducers/cart'
 
-import { Logo, HeaderContainer, FlexContainer } from './styles'
 import logoImg from '../../assets/efood_logo.svg'
+import cartImg from '../../assets/cart.svg'
+
+import * as S from './styles'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -16,13 +18,21 @@ const Header = () => {
   }
 
   return (
-    <HeaderContainer>
-      <FlexContainer className="container">
-        <Link to="/">Restaurantes</Link>
-        <Logo src={logoImg} alt="efood" />
-        <a onClick={openCart}>{items.length} produto(s) no carrinho</a>
-      </FlexContainer>
-    </HeaderContainer>
+    <S.HeaderContainer>
+      <S.FlexContainer className="container">
+        <Link title="Clique aqui para acessar a página de restaurantes" to="/">
+          Restaurantes
+        </Link>
+        <S.Logo src={logoImg} alt="efood" />
+        <S.CartButton
+          title="Clique aqui para abrir o carrinho"
+          onClick={openCart}
+        >
+          {items.length} <span>produto(s) no carrinho</span>{' '}
+          <img src={cartImg} alt="Cart image" />{' '}
+        </S.CartButton>
+      </S.FlexContainer>
+    </S.HeaderContainer>
   )
 }
 

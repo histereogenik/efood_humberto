@@ -9,9 +9,18 @@ export type Props = {
   onClick?: () => void
   children: string
   background: string
+  disabled?: boolean
 }
 
-const Button = ({ type, title, to, onClick, children, background }: Props) => {
+const Button = ({
+  disabled,
+  type,
+  title,
+  to,
+  onClick,
+  children,
+  background
+}: Props) => {
   if (type === 'wide') {
     return (
       <WideButton
@@ -19,6 +28,7 @@ const Button = ({ type, title, to, onClick, children, background }: Props) => {
         title={title}
         onClick={onClick}
         background={background}
+        disabled={disabled}
       >
         {children}
       </WideButton>

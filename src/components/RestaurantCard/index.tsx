@@ -1,15 +1,9 @@
-import {
-  Card,
-  TitleRating,
-  RatingStar,
-  Description,
-  DishImage,
-  Infos
-} from './styles'
-
-import star from '../../assets/star.svg'
 import Button from '../Button'
 import Tag from '../Tag'
+
+import star from '../../assets/star.svg'
+
+import * as S from './styles'
 
 type Props = {
   id: number
@@ -38,21 +32,21 @@ const RestaurantCard = ({
   }
 
   return (
-    <Card>
-      <DishImage src={image} alt="sushi" />
-      <Infos>
+    <S.Card>
+      <S.DishImage src={image} alt="sushi" />
+      <S.Infos>
         {highlight === true && <Tag>destaque da semana</Tag>}
         <Tag>{origin}</Tag>
-      </Infos>
+      </S.Infos>
       <div>
-        <TitleRating className="flex">
+        <S.TitleRating className="flex">
           <h4>{title}</h4>
           <div className="flex">
             <h4>{rating}</h4>
-            <RatingStar src={star} alt="star" />
+            <S.RatingStar src={star} alt="star" />
           </div>
-        </TitleRating>
-        <Description>{getDescription(description)}</Description>
+        </S.TitleRating>
+        <S.Description>{getDescription(description)}</S.Description>
         <Button
           to={`/product/${id}`}
           title="Clique aqui para saber mais"
@@ -62,7 +56,7 @@ const RestaurantCard = ({
           Saiba Mais
         </Button>
       </div>
-    </Card>
+    </S.Card>
   )
 }
 

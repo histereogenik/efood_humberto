@@ -1,14 +1,9 @@
-import {
-  ProductContainer,
-  Description,
-  ProductImage,
-  ProductName
-} from './styles'
-
-import Button from '../Button'
 import { useState } from 'react'
+
 import ProductModal from '../ProductModal'
-import { MenuItem } from '../../pages/Home'
+import Button from '../Button'
+
+import * as S from './styles'
 
 type Props = {
   productImg: string
@@ -42,10 +37,10 @@ const ProductCard = ({
 
   return (
     <>
-      <ProductContainer>
-        <ProductImage src={productImg} alt="pizza" />
-        <ProductName>{productTitle}</ProductName>
-        <Description>{getDescription(productDescription)}</Description>
+      <S.ProductContainer>
+        <S.ProductImage src={productImg} alt="pizza" />
+        <S.ProductName>{productTitle}</S.ProductName>
+        <S.Description>{getDescription(productDescription)}</S.Description>
         <Button
           background="salmon"
           title="Clique aqui para adicionar esse produto ao carrinho"
@@ -54,7 +49,7 @@ const ProductCard = ({
         >
           Adicionar ao carrinho
         </Button>
-      </ProductContainer>
+      </S.ProductContainer>
       <ProductModal
         menuItem={menuItem}
         isVisible={modalIsOpen}

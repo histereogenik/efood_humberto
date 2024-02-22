@@ -19,7 +19,7 @@ export const CartContainer = styled.div`
   height: 100%;
   display: none;
   justify-content: flex-end;
-  z-index: 1;
+  z-index: 3;
 
   &.is-open {
     display: flex;
@@ -35,6 +35,13 @@ export const Sidebar = styled.aside`
 
   > button {
     margin-bottom: 16px;
+  }
+
+  .empty-cart-text {
+    font-size: 14px;
+    line-height: 22px;
+    color: ${colors.cream};
+    text-align: center;
   }
 `
 export const TotalPrice = styled.div`
