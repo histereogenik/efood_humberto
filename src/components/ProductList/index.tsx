@@ -5,21 +5,22 @@ import { MenuItem } from '../../pages/Home'
 import { ProductsContainer } from './styles'
 
 type Props = {
-  menuItems: MenuItem[]
+  menuItems?: MenuItem[]
 }
 
 const ProductList = ({ menuItems }: Props) => (
   <div className="container">
     <ProductsContainer>
-      {menuItems.map((i) => (
-        <ProductCard
-          menuItem={i}
-          key={i.id}
-          productTitle={i.nome}
-          productDescription={i.descricao}
-          productImg={i.foto}
-        />
-      ))}
+      {menuItems &&
+        menuItems.map((i) => (
+          <ProductCard
+            menuItem={i}
+            key={i.id}
+            productTitle={i.nome}
+            productDescription={i.descricao}
+            productImg={i.foto}
+          />
+        ))}
     </ProductsContainer>
   </div>
 )

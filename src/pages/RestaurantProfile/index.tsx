@@ -5,14 +5,14 @@ import ProfileBanner from '../../components/ProfileBanner'
 import ProductList from '../../components/ProductList'
 
 import { useGetSelectedRestaurantQuery } from '../../services/api'
+import Loader from '../../components/Loader'
 
 const RestaurantProfile = () => {
   const { id } = useParams()
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { data: selectedRestaurant } = useGetSelectedRestaurantQuery(id!)
 
   if (!selectedRestaurant) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   return (

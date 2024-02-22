@@ -24,16 +24,12 @@ export type Restaurant = {
 }
 
 const Home = () => {
-  const { data: restaurants } = useGetRestaurantsQuery()
-
-  if (!restaurants) {
-    return <h3>Carregando...</h3>
-  }
+  const { data: restaurants, isLoading } = useGetRestaurantsQuery()
 
   return (
     <>
       <Hero />
-      <RestaurantList restaurants={restaurants} />
+      <RestaurantList isLoading={isLoading} restaurants={restaurants} />
     </>
   )
 }
